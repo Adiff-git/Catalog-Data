@@ -1,0 +1,18 @@
+{
+  "scope": "MVP_1500_DEVELOPMENT_ONLY",
+  "decision_source": "Project-owner approval in current task; no independent signature or timestamp asserted",
+  "policy_approval": "APPROVED",
+  "demo_catalog_data_approval": "APPROVED",
+  "pilot100_individual_review": "APPROVED",
+  "full1500_individual_review": "NOT_CLAIMED",
+  "sku_policy": "DEMO-AMZ-{parent_asin}; internal demo SKU, not manufacturer SKU",
+  "variant_policy": "One suitable demo Variant per Product; empty option_combination for single Variant",
+  "brand_policy": "Unresolved Brand may be NULL",
+  "initial_product_status": "DRAFT",
+  "price_policy": "Existing proposed category-level positive integral VND demo prices; not verified market prices",
+  "category_policy": "Previously proposed Electronics root plus nine category paths",
+  "asin_provenance": "Preserve parent_asin and existing source trace; do not assert missing original payload evidence",
+  "database_target_approval": "NOT_GRANTED",
+  "media_redistribution_authorization": "NOT_GRANTED",
+  "category_target_uuid_status": "PENDING_TARGET_INSPECTION"
+}

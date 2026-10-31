@@ -1,0 +1,13 @@
+.env
+.env.*
+*.dump
+*.sqlite
+__pycache__/
+.local-image-cache/
+staging/
+*.parquet
+*.db
+*.pem
+*.key
+*checkpoint*.json
+images/authentic/

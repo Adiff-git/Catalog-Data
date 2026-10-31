@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "source_category": "Electronics",
+      "path": [
+        "Electronics"
+      ],
+      "category_uuid": "c6985605-889a-5db1-bad4-99661f9eb2e3",
+      "parent_uuid": null,
+      "approval": "APPROVED"
+    },
+    {
+      "source_category": "Charger & Power Bank",
+      "path": [
+        "Electronics",
+        "Charger & Power Bank"
+      ],
+      "category_uuid": "f065e70e-4abe-5b7f-9112-264bd82c2930",
+      "parent_uuid": "c6985605-889a-5db1-bad4-99661f9eb2e3",
+      "approval": "APPROVED"
+    },
+    {
+      "source_category": "Computer Accessories",
+      "path": [
+        "Electronics",
+        "Computer Accessories"
+      ],
+      "category_uuid": "71466214-4779-5c2c-94ac-8c62fd045851",
+      "parent_uuid": "c6985605-889a-5db1-bad4-99661f9eb2e3",
+      "approval": "APPROVED"
+    },
+    {
+      "source_category": "Headphone & Earbuds",
+      "path": [
+        "Electronics",
+        "Headphone & Earbuds"
+      ],
+      "category_uuid": "7deb1ef0-d732-58ba-8cea-43f0e1fc64c9",
+      "parent_uuid": "c6985605-889a-5db1-bad4-99661f9eb2e3",
+      "approval": "APPROVED"
+    },
+    {
+      "source_category": "Laptop",
+      "path": [
+        "Electronics",
+        "Laptop"
+      ],
+      "category_uuid": "31549723-c1a2-56a6-a1a1-64da36e16f65",
+      "parent_uuid": "c6985605-889a-5db1-bad4-99661f9eb2e3",
+      "approval": "APPROVED"
+    },
+    {
+      "source_category": "Phone Accessories",
+      "path": [
+        "Electronics",
+        "Phone Accessories"
+      ],
+      "category_uuid": "05a4952a-ad71-5d91-8c5f-553bd15e61b2",
+      "parent_uuid": "c6985605-889a-5db1-bad4-99661f9eb2e3",
+      "approval": "APPROVED"
+    },
+    {
+      "source_category": "Smartphone",
+      "path": [
+        "Electronics",
+        "Smartphone"
+      ],
+      "category_uuid": "6d50755f-c3bd-521d-9eb8-2abaac52fdf6",
+      "parent_uuid": "c6985605-889a-5db1-bad4-99661f9eb2e3",
+      "approval": "APPROVED"
+    },
+    {
+      "source_category": "Smartwatch",
+      "path": [
+        "Electronics",
+        "Smartwatch"
+      ],
+      "category_uuid": "e4307f72-4af5-51a5-ae65-65edd6f0c9dc",
+      "parent_uuid": "c6985605-889a-5db1-bad4-99661f9eb2e3",
+      "approval": "APPROVED"
+    },
+    {
+      "source_category": "Speaker",
+      "path": [
+        "Electronics",
+        "Speaker"
+      ],
+      "category_uuid": "8f58ae12-5ae5-538b-a3dd-59eb57e8b1d3",
+      "parent_uuid": "c6985605-889a-5db1-bad4-99661f9eb2e3",
+      "approval": "APPROVED"
+    },
+    {
+      "source_category": "Tablet",
+      "path": [
+        "Electronics",
+        "Tablet"
+      ],
+      "category_uuid": "5793dbd1-a3e4-514e-bf1d-ef50a31acc04",
+      "parent_uuid": "c6985605-889a-5db1-bad4-99661f9eb2e3",
+      "approval": "APPROVED"
+    }
+  ]
+}

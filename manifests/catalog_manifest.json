@@ -1,0 +1,38 @@
+{
+  "authentic_amazon_image_count": 0,
+  "category_distribution": {
+    "Charger & Power Bank": 225,
+    "Computer Accessories": 300,
+    "Headphone & Earbuds": 225,
+    "Laptop": 150,
+    "Phone Accessories": 150,
+    "Smartphone": 150,
+    "Smartwatch": 75,
+    "Speaker": 150,
+    "Tablet": 75
+  },
+  "data_approval_status": "APPROVED",
+  "file_sha256": {
+    "data/approvals/amazon_import_approved_1500.csv": "5044b880bdc19174592cca7e0c948d7239567cab1b625e6d67bbe9af8e2c1ef2",
+    "data/approvals/amazon_import_reviewed_pilot100.csv": "388162d068b0e0a1426cb189fd5fe8c78def35313cfb6b8b4f823939feae07df",
+    "data/approvals/amazon_import_template.csv": "6ecd8d3b9d95c0f251fb8e5f021dfaf79d277b9c784118cb847f97aa0d8b7966",
+    "data/approvals/development_policy_decisions.json": "755a65b2c4d7e95d0c06810393acba9d5b0bcfe406b95a8a9c0fcfb630d1abab",
+    "data/category_mapping.json": "48f1dc636587c15779c68928898b43b940ee181eafa51648b699fe852ef8cb40",
+    "data/products.jsonl": "6c5dead52ce5691a3277126ff8ee9c588da70e085dae095b4e2bd0bb829e74b9",
+    "data/specifications.jsonl": "b74cbdd2c2f15d415280a17352ed4025dc126d89fae19b1201a4d579d7b2506d",
+    "data/stages/stage1000_asins.json": "5b8a8eafd63cf07452c6f945843a6b7b5ccb2c514d668b2f6e3669f9be8b5cf6",
+    "data/stages/stage100_asins.json": "6a9f098d513a441fc058f846c0d9a39f4ee3d658b6dbb9dd1938f840d413ac4f",
+    "data/variants.jsonl": "701bdd7986ab8110e64d58f9b55cbbe88edcb1c27b4c8a9dba9a00e73088b0c5",
+    "manifests/image_manifest.json": "8ec040968e6d8710daf30cbf430466fe90f6aeac401ac818585ffd1d72e0ec01"
+  },
+  "image_count": 1500,
+  "image_rights_status": "GENERATED_FIXTURES_ONLY",
+  "local_preview_image_count": 0,
+  "product_count": 1500,
+  "publication_policy": "DRAFT; public GET requires separate publication approval",
+  "required_backend_flyway": "V1-V10 exact successful history",
+  "source_dataset_version": "Amazon Reviews 2023 / Dataset V4.1",
+  "state": "DATA_APPROVED_GENERATED_FIXTURES_PACKAGED_AUTHENTIC_MEDIA_PENDING",
+  "variant_count": 1500,
+  "version": "amazon-mvp1500-seed-1"
+}
