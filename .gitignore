@@ -9,5 +9,5 @@ staging/
 *.db
 *.pem
 *.key
-*checkpoint*.jsontoi muon up anh o repo catalo
+*checkpoint*.json
 

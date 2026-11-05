@@ -1,2 +1,2 @@
-# Generated illustrative fixtures are stored as ordinary Git data files.
-images/fixtures/*.webp binary
+# Product images are stored as ordinary Git data files.
+images/product/*.webp binary

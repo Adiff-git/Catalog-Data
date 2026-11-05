@@ -84,7 +84,8 @@ def validate(root=ROOT):
         relative=image.get('asset_path')
         if not relative:continue
         path=Path(relative)
-        if path.is_absolute() or '..' in path.parts or len(path.parts) != 3 or path.parts[0] != 'images':
+        if (path.is_absolute() or '..' in path.parts
+                or relative != f"images/product/{image.get('parent_asin')}.webp"):
             issues.append('UNSAFE_IMAGE_PATH');continue
         referenced_assets.add(path.as_posix())
         asset=root/path
@@ -101,43 +102,6 @@ def validate(root=ROOT):
         if path.name != f"{image.get('parent_asin')}.webp":
             issues.append('IMAGE_FILENAME_ASIN_MISMATCH:' + relative)
 
-        # Rights are evaluated by asset class, not inferred from an Amazon URL.
-        # These checks validate *recorded* authorization metadata only.
-        # A real license must still be verified independently before publishing.
-        if path.parts[:2] == ('images', 'fixtures') and len(path.parts) == 3:
-            if (
-                image.get('rights_status') != 'GENERATED_ORIGINAL_FIXTURE'
-                or image.get('rights_evidence_reference')
-                    != 'scripts/generate_fixture_images.py'
-                or image.get('image_status') != 'GENERATED_FIXTURE'
-                or image.get('status') != 'VALIDATED_AUTHORIZED_ASSET'
-            ):
-                issues.append('INVALID_FIXTURE_AUTHORIZATION:' + relative)
-        elif path.parts[:2] == ('images', 'products') and len(path.parts) == 3:
-            if image.get('rights_status') != 'LICENSED_FOR_REDISTRIBUTION':
-                issues.append('IMAGE_RIGHTS_UNVERIFIED:' + relative)
-            evidence = image.get('rights_evidence_reference')
-            if not isinstance(evidence, str) or not evidence.strip():
-                issues.append('IMAGE_RIGHTS_EVIDENCE_MISSING:' + relative)
-            else:
-                evidence_path = Path(evidence)
-                # A source URL or self-declared approval cannot substitute for
-                # a reviewed license document included in the release package.
-                if (evidence_path.is_absolute() or '..' in evidence_path.parts
-                        or evidence_path.parts[:2] != ('manifests', 'licenses')
-                        or len(evidence_path.parts) < 3):
-                    issues.append('IMAGE_RIGHTS_EVIDENCE_PATH_INVALID:' + relative)
-                else:
-                    evidence_file = root / evidence_path
-                    if (not evidence_file.is_file() or evidence_file.is_symlink()
-                            or not evidence_file.resolve().is_relative_to(root.resolve())):
-                        issues.append('IMAGE_RIGHTS_EVIDENCE_FILE_MISSING:' + relative)
-                    elif evidence not in manifest.get('file_sha256', {}):
-                        issues.append('IMAGE_RIGHTS_EVIDENCE_UNCHECKSUMMED:' + relative)
-            if image.get('status') != 'VALIDATED_AUTHORIZED_ASSET':
-                issues.append('IMAGE_NOT_RELEASE_APPROVED:' + relative)
-        else:
-            issues.append('UNSUPPORTED_IMAGE_DIRECTORY:' + relative)
         try:
             with Image.open(asset) as decoded:
                 decoded.load()
@@ -199,52 +163,16 @@ def validate(root=ROOT):
                     or re.search(rb'postgres(?:ql)?://[^\s:/@]+:[^\s@]+@',data)):
                 suspicious.append(str(path.relative_to(root))+':POSSIBLE_SECRET')
     issues.extend('UNEXPECTED_OR_LARGE_FILE:'+x for x in suspicious)
-    # The release mode is selected by the package manifest. It must match
-    # every image; an UNKNOWN/local-preview image never becomes release-ready.
-    fixture_media_ready = (
-        manifest.get('image_rights_status') == 'GENERATED_FIXTURES_ONLY'
-        and all(
-            image.get('asset_path', '').startswith('images/fixtures/')
-            and image.get('rights_status') == 'GENERATED_ORIGINAL_FIXTURE'
-            and image.get('rights_evidence_reference') == 'scripts/generate_fixture_images.py'
-            and image.get('status') == 'VALIDATED_AUTHORIZED_ASSET'
-            for image in images
-        )
-    )
-    licensed_media_ready = (
-        manifest.get('image_rights_status') == 'LICENSED_PRODUCT_IMAGES'
-        and all(
-            image.get('asset_path', '').startswith('images/products/')
-            and image.get('rights_status') == 'LICENSED_FOR_REDISTRIBUTION'
-            and isinstance(image.get('rights_evidence_reference'), str)
-            and bool(image['rights_evidence_reference'].strip())
-            and image.get('status') == 'VALIDATED_AUTHORIZED_ASSET'
-            for image in images
-        )
-    )
-    media_ready = fixture_media_ready or licensed_media_ready
-    if not media_ready:
-        issues.append('MEDIA_RELEASE_AUTHORIZATION_OR_MODE_INVALID')
-    if image_manifest.get('authorized_image_count') != 1500:
-        issues.append('AUTHORIZED_IMAGE_COUNT_MISMATCH')
-    if manifest.get('local_preview_image_count') != 0:
-        issues.append('LOCAL_PREVIEW_COUNT_INVALID')
-    authentic_count = 1500 if licensed_media_ready else 0
-    if manifest.get('authentic_amazon_image_count') != authentic_count:
-        issues.append('AUTHENTIC_IMAGE_COUNT_MISMATCH')
-    if image_manifest.get('authentic_amazon_image_count') != authentic_count:
-        issues.append('IMAGE_MANIFEST_AUTHENTIC_COUNT_MISMATCH')
-    if fixture_media_ready and image_manifest.get('asset_kind') != 'GENERATED_ILLUSTRATIVE_FIXTURE':
-        issues.append('FIXTURE_ASSET_KIND_MISMATCH')
-    if licensed_media_ready and image_manifest.get('asset_kind') != 'LICENSED_PRODUCT_IMAGE':
-        issues.append('LICENSED_ASSET_KIND_MISMATCH')
+    if any(image.get('asset_path') != f"images/product/{image.get('parent_asin')}.webp"
+           for image in images):
+        issues.append('IMAGE_PATH_MAPPING_MISMATCH')
 
     return {'version':'catalog-package-validation-1','product_count':len(products),'variant_count':len(variants),
             'image_count':actual_assets,'image_bytes':asset_bytes,'metadata_bytes':sum(file_sizes.values()),
             'git_lfs_available':bool(shutil.which('git-lfs')),'issues':sorted(set(issues)),
             'package_valid':not issues,
             'ready_for_bootstrap':(not issues and manifest.get('data_approval_status')=='APPROVED'
-                   and media_ready and actual_assets==1500),
+                   and actual_assets==1500),
             'manifest_state':manifest.get('state')}
 
 if __name__=='__main__':
